@@ -4,13 +4,15 @@ import { UserRouter } from './user.routes'
 import { BeritaRouter } from './berita.routes'
 import { GaleriImageRouter } from './galeri-image.routes'
 import { GaleriVideoRouter } from './galeri-video.routes'
+import { CountRouter } from './count.routes'
 
 const _routes: Array<[string, Router]> = [
   ['/v1/api/', HealthRouter],
   ['/v1/api/auth', UserRouter],
   ['/v1/api/berita', BeritaRouter],
   ['/v1/api/galeri-image', GaleriImageRouter],
-  ['/v1/api/galeri-video', GaleriVideoRouter]
+  ['/v1/api/galeri-video', GaleriVideoRouter],
+  ['/v1/api/count', CountRouter]
 ]
 
 export const routes = (app: Application) => {
