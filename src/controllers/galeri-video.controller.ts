@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
+
 import { Request, Response } from 'express'
 import { logger } from '../utils/logger'
 import { GaleriVideoModel } from '../models/galeri-video.model'
@@ -29,10 +32,16 @@ export const createGaleriVideo = async (req: Request, res: Response) => {
 }
 
 export const getGaleriVideo = async (req: Request, res: Response) => {
-  const { page = 1, limit = 20 } = req.query
+  const { page = 1, limit = 20, search = '' } = req.query
 
   try {
-    const galeriVideo = await GaleriVideoModel.paginate({}, { page: +page, limit: +limit })
+    const galeriVideo = await GaleriVideoModel.paginate(
+      {
+        // @ts-ignore
+        title: { $regex: search, $options: 'i' }
+      },
+      { page: +page, limit: +limit }
+    )
 
     const { docs: results, limit: limitPerPage, totalPages, prevPage, nextPage, page: currentPage } = galeriVideo
 

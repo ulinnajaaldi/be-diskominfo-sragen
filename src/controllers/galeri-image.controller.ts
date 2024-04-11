@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
+
 import { Request, Response } from 'express'
 import { logger } from '../utils/logger'
 import { GaleriImageModel } from '../models/galeri-image.model'
@@ -29,10 +32,16 @@ export const createGaleriImage = async (req: Request, res: Response) => {
 }
 
 export const getGaleriImage = async (req: Request, res: Response) => {
-  const { page = 1, limit = 20 } = req.query
+  const { page = 1, limit = 20, search = '' } = req.query
 
   try {
-    const galeriImage = await GaleriImageModel.paginate({}, { page: +page, limit: +limit })
+    const galeriImage = await GaleriImageModel.paginate(
+      {
+        // @ts-ignore
+        title: { $regex: search, $options: 'i' }
+      },
+      { page: +page, limit: +limit }
+    )
 
     const { docs: results, limit: limitPerPage, totalPages, prevPage, nextPage, page: currentPage } = galeriImage
 

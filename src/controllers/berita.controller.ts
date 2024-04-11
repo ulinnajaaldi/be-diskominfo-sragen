@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/prefer-ts-expect-error */
+
 import { Request, Response } from 'express'
 import { logger } from '../utils/logger'
 import { BeritaModel } from '../models/berita.model'
@@ -29,10 +32,16 @@ export const createBerita = async (req: Request, res: Response) => {
 }
 
 export const getBerita = async (req: Request, res: Response) => {
-  const { page = 1, limit = 10 } = req.query
+  const { page = 1, limit = 10, search = '' } = req.query
 
   try {
-    const berita = await BeritaModel.paginate({}, { page: +page, limit: +limit })
+    const berita = await BeritaModel.paginate(
+      {
+        // @ts-ignore
+        title: { $regex: search, $options: 'i' }
+      },
+      { page: +page, limit: +limit }
+    )
 
     const { docs: results, limit: limitPerPage, totalPages, prevPage, nextPage, page: currentPage } = berita
 
