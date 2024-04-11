@@ -1,24 +1,29 @@
 import mongoose, { Document } from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate-v2'
 
-const GaleriVideoSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
+const GaleriVideoSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true
+    },
+    video: {
+      type: String,
+      required: true
+    },
+    thumbnail: {
+      type: String,
+      required: true
+    },
+    description: {
+      type: String,
+      required: true
+    }
   },
-  video: {
-    type: String,
-    required: true
-  },
-  thumbnail: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
+  {
+    timestamps: true
   }
-})
+)
 
 GaleriVideoSchema.plugin(mongoosePaginate)
 

@@ -1,20 +1,25 @@
 import mongoose, { Document } from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate-v2'
 
-const BeritaSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
+const BeritaSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true
+    },
+    image: {
+      type: String,
+      required: true
+    },
+    content: {
+      type: String,
+      required: true
+    }
   },
-  image: {
-    type: String,
-    required: true
-  },
-  content: {
-    type: String,
-    required: true
+  {
+    timestamps: true
   }
-})
+)
 
 BeritaSchema.plugin(mongoosePaginate)
 

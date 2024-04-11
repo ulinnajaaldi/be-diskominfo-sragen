@@ -1,16 +1,21 @@
 import mongoose, { Document } from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate-v2'
 
-const GaleriImageSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
+const GaleriImageSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true
+    },
+    image: {
+      type: String,
+      required: true
+    }
   },
-  image: {
-    type: String,
-    required: true
+  {
+    timestamps: true
   }
-})
+)
 
 GaleriImageSchema.plugin(mongoosePaginate)
 
