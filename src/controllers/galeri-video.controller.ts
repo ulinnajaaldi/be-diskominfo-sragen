@@ -40,7 +40,7 @@ export const getGaleriVideo = async (req: Request, res: Response) => {
         // @ts-ignore
         title: { $regex: search, $options: 'i' }
       },
-      { page: +page, limit: +limit }
+      { page: +page, limit: +limit, sort: { createdAt: -1 } }
     )
 
     const { docs: results, limit: limitPerPage, totalPages, prevPage, nextPage, page: currentPage } = galeriVideo
